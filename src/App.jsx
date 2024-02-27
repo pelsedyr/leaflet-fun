@@ -1,14 +1,16 @@
-import { useState } from 'react'
-import './App.css'
-import TextDisplay from './TextDisplay'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-import MyMapComponent from './MyMapComponent'
+import { useState } from 'react';
+import './App.css';
+import TextDisplay from './TextDisplay';
+import PlaceDisplay from './PlaceDisplay';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import MyMapComponent from './MyMapComponent';
 import 'leaflet/dist/leaflet.css';
-import { getReverseGeocode } from './api/getGeocode'
+import { getReverseGeocode } from './api/getGeocode';
 
 function App() {
 
   const [displayText, setDisplayText] = useState('Hello, World!');
+  const [place, setPlace] = useState({});
   const [latlng, setLatLng] = useState([51.505, -0.09]);
   const [zoom, setZoom] = useState(13);
 
@@ -27,6 +29,7 @@ function App() {
     getReverseGeocode(latlng.lat, latlng.lng, zoom).then(data => {
       console.log(data);
       setDisplayText(data.display_name);
+      setPlace(data.address);
     });
     setLatLng([latlng.lat, latlng.lng]);
   }
@@ -49,6 +52,8 @@ function App() {
       </div>
       <div className="grid-item">
         <TextDisplay text={displayText} />
+        ---
+        <PlaceDisplay {...place} />
       </div>
     </div>
   )
