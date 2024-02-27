@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Lukas",
+            "type": "firefox",
+            "request": "launch",
+            "url": "http://localhost:5173",
+            // "reAttach": true,
+            // "addonPath": "${workspaceFolder}"
+        }
+    ],
+}
