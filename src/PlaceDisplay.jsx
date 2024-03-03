@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 function PlaceDisplay(props) {
     let { road, suburb, village, town, city, municipality, county, state, country } = props;
     return (
@@ -14,5 +16,17 @@ function PlaceDisplay(props) {
         </div>
     )
 }
+
+PlaceDisplay.propTypes = {
+    road: PropTypes.string,
+    suburb: PropTypes.string,
+    village: PropTypes.string,
+    town: PropTypes.string,
+    city: PropTypes.string,
+    municipality: PropTypes.string,
+    county: PropTypes.string,
+    state: PropTypes.string,
+    country: PropTypes.string
+  };
 
 export default PlaceDisplay;
