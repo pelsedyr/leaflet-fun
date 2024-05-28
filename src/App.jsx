@@ -6,6 +6,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import MyMapComponent from './MyMapComponent';
 import 'leaflet/dist/leaflet.css';
 import { getReverseGeocode } from './api/getGeocode';
+import { getWeather } from './api/getWeather';
 
 function App() {
 
@@ -25,13 +26,21 @@ function App() {
 
   const handleLatLngClick = (latlng) => {
     console.log(latlng);
-    // setDisplayText(`Latitude: ${latlng.lat}, Longitude: ${latlng.lng}`);
     getReverseGeocode(latlng.lat, latlng.lng, zoom).then(data => {
       console.log(data);
       setDisplayText(data.display_name);
       setPlace(data.address);
     });
     setLatLng([latlng.lat, latlng.lng]);
+    handleWeatherRequest();
+  }
+
+  const handleWeatherRequest = () => {
+    if(latlng !== null) {
+      getWeather(latlng[0], latlng[1]).then(data => {
+        console.log("Weather request " + data);
+      });
+    }
   }
 
   return (
